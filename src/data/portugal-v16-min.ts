@@ -1,0 +1,1 @@
+export const portugalV16Min = { name: 'Portugal', areas: ['Pintura','Escultura','Literatura','Música','Cinema','Fotografia','Arquitectura & Design','História','Património','Gastronomia','Turismo & Natureza','Comunidades','Personalidades','Testa os teus Conhecimentos'] };
