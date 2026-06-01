@@ -1,0 +1,24 @@
+const D = window.IN7ARTES_DATA;
+let currentTab = "Artistas - Top Actual";
+const countrySel = document.getElementById("country");
+const areaSel = document.getElementById("area");
+const searchInput = document.getElementById("search");
+const title = document.getElementById("title");
+const rule = document.getElementById("rule");
+const stats = document.getElementById("stats");
+const tabs = document.getElementById("tabs");
+const content = document.getElementById("content");
+function countryEntries(){return Object.entries(D.countries || {});}
+function allAreas(){const set = new Set(); for(const [,country] of countryEntries()){Object.keys(country.areas || {}).forEach(a => set.add(a));} return Array.from(set);}
+function allSections(){const set = new Set(); for(const [,country] of countryEntries()){for(const area of Object.keys(country.areas || {})){Object.keys(country.areas[area] || {}).forEach(s => set.add(s));}} return Array.from(set);}
+function init(){countrySel.innerHTML = [`<option value="__all__">🌍 Todos os países</option>`, ...countryEntries().map(([key,c]) => `<option value="${key}">${c.flag || ""} ${c.name}</option>`)].join(""); fillAreas(); currentTab = "Artistas - Top Actual"; render();}
+function fillAreas(){const countryKey = countrySel.value; let areas = []; if(countryKey === "__all__") areas = allAreas(); else areas = Object.keys(D.countries[countryKey]?.areas || {}); areaSel.innerHTML = [`<option value="__all__">🎭 Todas as áreas</option>`, ...areas.map(a => `<option value="${a}">${a}</option>`)].join("");}
+countrySel.addEventListener("change", () => {fillAreas(); currentTab = "Artistas - Top Actual"; render();});
+areaSel.addEventListener("change", () => {currentTab = "Artistas - Top Actual"; render();});
+searchInput.addEventListener("input", render);
+function selectedCountries(){if(countrySel.value === "__all__") return countryEntries(); const c = D.countries[countrySel.value]; return c ? [[countrySel.value,c]] : [];}
+function selectedAreas(country){if(areaSel.value === "__all__") return Object.keys(country.areas || {}); return country.areas?.[areaSel.value] ? [areaSel.value] : [];}
+function buildRows(){const rows = []; const q = searchInput.value.toLowerCase().trim(); for(const [countryKey,country] of selectedCountries()){for(const areaName of selectedAreas(country)){const sections = country.areas[areaName] || {}; for(const [sectionName,items] of Object.entries(sections)){for(const item of (items || [])){const searchable = [item,country.name,countryKey,areaName,sectionName].join(" ").toLowerCase(); if(!q || searchable.includes(q)){rows.push({countryKey,countryName:country.name,flag:country.flag || "",areaName,sectionName,item});}}}}} return rows;}
+function renderTabs(){let secs = allSections(); if(countrySel.value !== "__all__" && areaSel.value !== "__all__"){secs = Object.keys(D.countries[countrySel.value]?.areas?.[areaSel.value] || {});} tabs.innerHTML = [`<button class="${currentTab === "__all__" ? "active" : ""}" onclick="currentTab='__all__'; render()">Todas as subáreas</button>`, ...secs.map(s => `<button class="${s === currentTab ? "active" : ""}" onclick="currentTab=${JSON.stringify(s)}; render()">${s}</button>`)].join("");}
+function render(){const countryLabel = countrySel.value === "__all__" ? "🌍 Todos os países" : `${D.countries[countrySel.value]?.flag || ""} ${D.countries[countrySel.value]?.name || ""}`; const areaLabel = areaSel.value === "__all__" ? "Todas as áreas" : areaSel.value; title.textContent = `${countryLabel} — ${areaLabel}`; rule.textContent = `${D.rule || ""} ${D.search_rule || ""}`; let rows = buildRows(); if(currentTab !== "__all__") rows = rows.filter(r => r.sectionName === currentTab); renderTabs(); const countriesCount = new Set(rows.map(r => r.countryName)).size; const areasCount = new Set(rows.map(r => `${r.countryName}:${r.areaName}`)).size; const sectionsCount = new Set(rows.map(r => r.sectionName)).size; stats.innerHTML = `<span>${countriesCount} países encontrados</span><span>${areasCount} áreas encontradas</span><span>${sectionsCount} subáreas</span><span>${rows.length} resultados</span>`; if(!rows.length){content.innerHTML = `<article class="card empty"><h2>Sem resultados</h2><p>Tenta pesquisar por nome, país ou arte.</p></article>`; return;} const grouped = {}; for(const r of rows){const key = `${r.countryName}||${r.areaName}||${r.sectionName}`; if(!grouped[key]) grouped[key] = []; grouped[key].push(r);} content.innerHTML = Object.entries(grouped).map(([key,items]) => {const [countryName,areaName,sectionName] = key.split("||"); const flag = items[0].flag || ""; return `<article class="card"><div class="meta">${flag} ${countryName} · ${areaName}</div><h2>${sectionName}</h2><ol>${items.slice(0,80).map(r => `<li>${r.item}</li>`).join("")}</ol></article>`;}).join("");}
+init();
