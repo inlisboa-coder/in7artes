@@ -1,0 +1,20 @@
+body{margin:0;font-family:Arial;background:#f5eddd;color:#111}
+header{position:sticky;top:0;z-index:10;background:#0d3b2e;color:white;padding:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:4px solid #c49a3a}
+header b{font-size:28px;color:#c49a3a}
+header span{color:#ead49a}
+select,input{padding:9px;border-radius:10px;border:1px solid #c49a3a}
+input{min-width:280px;flex:1}
+.hero{background:linear-gradient(135deg,#0d3b2e,#1b5a47);color:white;padding:32px}
+.hero h1{font-size:40px;margin:0 0 10px}
+#stats span{display:inline-block;background:rgba(255,255,255,.15);padding:8px 12px;border-radius:999px;margin:4px}
+nav{position:sticky;top:66px;z-index:9;background:#123f32;padding:10px;display:flex;gap:8px;overflow:auto}
+button{white-space:nowrap;border:1px solid #c49a3a;border-radius:999px;padding:8px 12px;background:#fff8e6;font-weight:bold;cursor:pointer}
+button.active{background:#c49a3a}
+main{padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px}
+.card{background:white;border-radius:16px;border-top:5px solid #c49a3a;padding:18px;box-shadow:0 4px 14px #0002}
+.card h2{margin-top:0;color:#0d3b2e}
+.card .meta{font-size:13px;color:#755500;margin-bottom:8px}
+li{margin:5px 0}
+footer{text-align:center;background:#0d3b2e;color:#ead49a;padding:24px}
+.empty{grid-column:1/-1;text-align:center;padding:30px}
+@media(max-width:800px){.hero h1{font-size:28px}nav{top:130px}input{min-width:180px;width:100%}}
