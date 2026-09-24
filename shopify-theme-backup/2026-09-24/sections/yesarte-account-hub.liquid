@@ -1,0 +1,97 @@
+{% liquid
+  assign perfil = 'geral'
+  if customer
+    if customer.tags contains 'perfil-artista'
+      assign perfil = 'artista'
+    elsif customer.tags contains 'perfil-entidade'
+      assign perfil = 'entidade'
+    elsif customer.tags contains 'perfil-colecionador'
+      assign perfil = 'colecionador'
+    endif
+  endif
+%}
+
+<section class="ya-account color-{{ section.settings.color_scheme }} gradient">
+  <div class="ya-account__inner page-width">
+    {% if customer %}
+      <div class="ya-account__header">
+        <div>
+          <p class="ya-account__eyebrow">ÁREA YES ARTE</p>
+          <h1>Olá{% if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif %}</h1>
+          <p>A sua conta é privada. Só terá um perfil público se o pedir e a YES Arte o validar.</p>
+        </div>
+        <span class="ya-account__badge">
+          {% case perfil %}
+            {% when 'artista' %}Perfil de Artista
+            {% when 'colecionador' %}Perfil de Colecionador
+            {% when 'entidade' %}Entidade Artística
+            {% else %}Utilizador Geral
+          {% endcase %}
+        </span>
+      </div>
+
+      <div class="ya-account__grid">
+        <a class="ya-account__card" href="{{ routes.account_url }}#orders"><span>01</span><h2>Encomendas</h2><p>Consulte compras, estados e histórico.</p></a>
+        <a class="ya-account__card" href="{{ routes.account_addresses_url }}"><span>02</span><h2>Moradas</h2><p>Gira os seus dados de entrega.</p></a>
+        <a class="ya-account__card" href="/pages/proposta-de-aquisicao"><span>03</span><h2>Fazer proposta</h2><p>Apresente uma proposta não vinculativa por uma obra.</p></a>
+      </div>
+
+      {% if perfil == 'artista' %}
+        <div class="ya-account__special">
+          <div><p class="ya-account__eyebrow">PERFIL VALIDADO</p><h2>A sua área de Artista</h2><p>Centralize biografia, fotografia, portefólio, obras, exposições e eventos. A publicação ou alteração editorial é revista pela equipa YES Arte.</p></div>
+          <div class="ya-account__actions"><a class="button" href="/pages/contact">Enviar obras ou atualizar perfil</a><a class="button button--secondary" href="/pages/artistas">Ver artistas</a></div>
+        </div>
+      {% elsif perfil == 'colecionador' %}
+        <div class="ya-account__special">
+          <div><p class="ya-account__eyebrow">PERFIL VALIDADO</p><h2>A sua área de Colecionador</h2><p>Peça aconselhamento, apresente propostas e contacte a YES Arte para aquisição, venda, avaliação ou consignação de obras.</p></div>
+          <div class="ya-account__actions"><a class="button" href="/pages/proposta-de-aquisicao">Fazer proposta</a><a class="button button--secondary" href="/pages/contact">Falar com a YES Arte</a></div>
+        </div>
+      {% elsif perfil == 'entidade' %}
+        <div class="ya-account__special">
+          <div><p class="ya-account__eyebrow">PERFIL VALIDADO</p><h2>A sua área de Entidade Artística</h2><p>Para galerias, museus, fundações, associações, espaços culturais e promotores: apresente a instituição, divulgue exposições e proponha eventos para o Calendário das Artes.</p></div>
+          <div class="ya-account__actions"><a class="button" href="/pages/calendario-das-artes#participar">Propor evento</a><a class="button button--secondary" href="/pages/contact">Atualizar entidade</a></div>
+        </div>
+      {% else %}
+        <div class="ya-account__special ya-account__choice">
+          <div>
+            <p class="ya-account__eyebrow">OPCIONAL</p>
+            <h2>Pretende uma área especializada?</h2>
+            <p>Pode continuar apenas como Utilizador Geral, sem página pública. Se for artista, colecionador ou entidade artística, peça a ativação do perfil adequado.</p>
+          </div>
+          {% form 'contact', class: 'ya-account__form' %}
+            {% if form.posted_successfully? %}<p class="form-status form-status-list form__message" tabindex="-1" autofocus>Pedido enviado. A equipa YES Arte irá analisá-lo.</p>{% endif %}
+            {{ form.errors | default_errors }}
+            <input type="hidden" name="contact[Origem]" value="Pedido de perfil — Área de cliente">
+            <input type="hidden" name="contact[Nome]" value="{{ customer.name | escape }}">
+            <input type="hidden" name="contact[email]" value="{{ customer.email | escape }}">
+            <fieldset>
+              <legend>Quero solicitar</legend>
+              <label><input type="radio" name="contact[Tipo de perfil]" value="Artista" required> Perfil de Artista</label>
+              <label><input type="radio" name="contact[Tipo de perfil]" value="Colecionador" required> Perfil de Colecionador</label>
+              <label><input type="radio" name="contact[Tipo de perfil]" value="Entidade Artística" required> Entidade Artística</label>
+            </fieldset>
+            <label for="Profile-message-{{ section.id }}">Apresentação ou informação adicional</label>
+            <textarea id="Profile-message-{{ section.id }}" name="contact[Informação]" rows="4" placeholder="Indique o seu percurso, interesses, website ou redes sociais."></textarea>
+            <label class="ya-account__check"><input type="checkbox" name="contact[Pretende perfil público]" value="Sim"> Pretendo que seja estudada a criação de uma página pública.</label>
+            <button class="button" type="submit">Pedir ativação</button>
+          {% endform %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="ya-account__guest">
+        <p class="ya-account__eyebrow">ÁREA YES ARTE</p><h1>A sua relação com a arte, num só lugar.</h1>
+        <p>Crie uma conta privada. Depois pode manter-se como Utilizador Geral ou pedir uma área de Artista, Colecionador ou Entidade Artística.</p>
+        <div class="ya-account__actions"><a class="button" href="{{ routes.account_register_url }}">Criar conta</a><a class="button button--secondary" href="{{ routes.account_login_url }}">Iniciar sessão</a></div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% style %}
+  .ya-account{padding:clamp(4rem,8vw,8rem) 0;background:#121212;color:#f4efe9}.ya-account__inner{max-width:120rem}.ya-account__header{display:flex;justify-content:space-between;gap:3rem;align-items:flex-start;border-bottom:1px solid rgba(184,115,51,.45);padding-bottom:3rem}.ya-account h1,.ya-account h2{color:inherit;margin:.4rem 0 1rem}.ya-account h1{font-size:clamp(3.2rem,6vw,6.4rem);line-height:1}.ya-account p{color:#cfc8c1}.ya-account__eyebrow{color:#c7834f!important;letter-spacing:.18em;font-size:1.2rem;font-weight:700}.ya-account__badge{border:1px solid #b87333;border-radius:999px;padding:.9rem 1.5rem;color:#e4a672;white-space:nowrap}.ya-account__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin:3rem 0}.ya-account__card{display:block;padding:2.4rem;border:1px solid #3b332e;background:#191715;color:inherit;text-decoration:none;transition:.2s}.ya-account__card:hover{border-color:#c7834f;transform:translateY(-2px)}.ya-account__card span{color:#c7834f}.ya-account__card h2{font-size:2.1rem}.ya-account__special{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;background:linear-gradient(135deg,#211a16,#141414);border-left:4px solid #b87333;padding:clamp(2.4rem,5vw,5rem);margin-top:2rem}.ya-account__actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}.ya-account__form{display:grid;gap:1.2rem}.ya-account__form fieldset{border:0;padding:0;margin:0;display:grid;gap:.8rem}.ya-account__form legend{font-weight:700;margin-bottom:.6rem}.ya-account__form input[type=radio],.ya-account__form input[type=checkbox]{accent-color:#b87333;margin-right:.7rem}.ya-account__form textarea{width:100%;padding:1.2rem;background:#fff;color:#111;border:1px solid #b87333}.ya-account__check{display:flex;align-items:flex-start}.ya-account__guest{max-width:78rem}.ya-account__guest .ya-account__actions{margin-top:2.4rem}
+  @media(max-width:749px){.ya-account__header{display:block}.ya-account__badge{display:inline-block;margin-top:1rem}.ya-account__grid{grid-template-columns:1fr}.ya-account__special{grid-template-columns:1fr;gap:2rem}.ya-account{padding:4rem 0}}
+{% endstyle %}
+
+{% schema %}
+{"name":"YES Arte — Área cliente","settings":[{"type":"color_scheme","id":"color_scheme","label":"Esquema de cores","default":"scheme-1"}],"presets":[{"name":"YES Arte — Área cliente"}]}
+{% endschema %}
