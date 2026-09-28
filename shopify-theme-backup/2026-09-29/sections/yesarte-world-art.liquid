@@ -1,0 +1,36 @@
+{% liquid
+  assign portugal_work = all_products['elefante-estudioso-serigrafia-de-julio-pomar']
+  assign africa_work = all_products['original-de-mabunda-santos-armando-copia']
+  assign ibero_work = all_products['mirada-al-vacio-olhar-para-o-vazio']
+%}
+<section class="ya-world" aria-labelledby="YaWorldTitle-{{ section.id }}">
+  <header class="ya-world__head">
+    <div><p>TRÊS UNIVERSOS · UMA COLEÇÃO</p><h2 id="YaWorldTitle-{{ section.id }}">Arte portuguesa, africana e ibero-americana</h2></div>
+    <p>A YES ARTE aproxima geografias, memórias e linguagens. Descubra autores consagrados e contemporâneos através de obras originais e edições selecionadas.</p>
+  </header>
+  <div class="ya-world__grid">
+    {% if portugal_work.available and portugal_work.featured_image %}
+      <a class="ya-world__card ya-world__card--portugal" href="{{ portugal_work.url }}">
+        {{ portugal_work.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,800,1200', sizes: '(max-width: 760px) 100vw, 40vw', alt: portugal_work.title }}
+        <span><b>01 · PORTUGAL</b><strong>Arte portuguesa</strong><em>Júlio Pomar, Vieira da Silva, José de Guimarães, Cargaleiro e outros autores.</em><small>Explorar esta obra →</small></span>
+      </a>
+    {% endif %}
+    {% if africa_work.available and africa_work.featured_image %}
+      <a class="ya-world__card ya-world__card--africa" href="{{ africa_work.url }}">
+        {{ africa_work.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,800,1200', sizes: '(max-width: 760px) 100vw, 30vw', alt: africa_work.title }}
+        <span><b>02 · ÁFRICA</b><strong>Arte africana</strong><em>Obras da Guiné-Bissau e de outros territórios e culturas africanas.</em><small>Explorar esta obra →</small></span>
+      </a>
+    {% endif %}
+    {% if ibero_work.available and ibero_work.featured_image %}
+      <a class="ya-world__card ya-world__card--ibero" href="{{ ibero_work.url }}">
+        {{ ibero_work.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,800,1200', sizes: '(max-width: 760px) 100vw, 30vw', alt: ibero_work.title }}
+        <span><b>03 · IBERO-AMÉRICA</b><strong>Olhares ibero-americanos</strong><em>Pintura contemporânea, cor, identidade e novas narrativas visuais.</em><small>Explorar esta obra →</small></span>
+      </a>
+    {% endif %}
+  </div>
+  <footer><p>Uma seleção em crescimento, aberta ao diálogo entre Portugal, o mundo lusófono, África e a América Latina.</p><a href="/collections/all">Ver todas as obras →</a></footer>
+</section>
+{% stylesheet %}
+.ya-world{--accent:#d88a55;background:#080809;color:#f5f0ec;padding:76px clamp(18px,5vw,80px);font-family:Arial,sans-serif;border-top:1px solid #4c2d20;border-bottom:1px solid #4c2d20}.ya-world__head{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,7vw,110px);align-items:end;margin-bottom:34px}.ya-world__head>div>p{color:var(--accent);font-size:11px;letter-spacing:.22em}.ya-world__head h2{font-size:clamp(38px,5vw,72px);line-height:1.02;font-weight:300;margin:12px 0 0;max-width:900px}.ya-world__head>p{color:#bcaea5;line-height:1.8;max-width:520px}.ya-world__grid{display:grid;grid-template-columns:1.2fr .9fr .9fr;min-height:560px;gap:10px}.ya-world__card{position:relative;overflow:hidden;min-height:560px;background:#161113;color:#fff;text-decoration:none}.ya-world__card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease}.ya-world__card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.94),rgba(0,0,0,.08) 72%)}.ya-world__card>span{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:30px;display:flex;flex-direction:column;gap:9px}.ya-world__card b{color:#efaa79;font-size:10px;letter-spacing:.18em}.ya-world__card strong{font-family:Georgia,serif;font-size:clamp(27px,3vw,43px);font-weight:400}.ya-world__card em{font-style:normal;color:#d4c9c2;line-height:1.55;font-size:13px;max-width:420px}.ya-world__card small{color:#f0a675;margin-top:8px;font-size:11px;letter-spacing:.08em}.ya-world__card:hover img{transform:scale(1.035);filter:saturate(1.08)}.ya-world footer{display:flex;justify-content:space-between;gap:30px;align-items:center;padding-top:28px}.ya-world footer p{color:#897b74;line-height:1.6}.ya-world footer a{color:#efaa79;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-size:11px;white-space:nowrap}@media(max-width:900px){.ya-world__head{grid-template-columns:1fr}.ya-world__grid{grid-template-columns:1fr 1fr}.ya-world__card{min-height:430px}.ya-world__card:first-child{grid-column:1/3}}@media(max-width:600px){.ya-world{padding:52px 16px}.ya-world__head h2{font-size:40px}.ya-world__grid{grid-template-columns:1fr;min-height:0}.ya-world__card,.ya-world__card:first-child{grid-column:auto;min-height:420px}.ya-world__card>span{padding:24px 20px}.ya-world footer{align-items:flex-start;flex-direction:column}.ya-world footer a{min-height:44px;display:flex;align-items:center}}
+{% endstylesheet %}
+{% schema %}{"name":"YES ARTE — Mundos","settings":[],"presets":[{"name":"YES ARTE — Mundos"}]}{% endschema %}
