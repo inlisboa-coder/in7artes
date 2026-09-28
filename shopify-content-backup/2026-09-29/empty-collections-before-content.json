@@ -1,0 +1,34 @@
+{
+  "backed_up_at": "2026-09-29",
+  "source": "Shopify connected store In7Artes.com",
+  "collections": [
+    {
+      "id": "gid://shopify/Collection/686388740423",
+      "title": "FOTOGRAFIA — ARTE, LISBOA & IMAGEM",
+      "handle": "fotografia-arte-lisboa-imagem",
+      "descriptionHtml": "<p>Fotografia artística, documental e de autor, com destaque para Lisboa, Portugal, o mundo lusófono, arquivos visuais, edições fotográficas e obras para coleção.</p>",
+      "productsCount": 0
+    },
+    {
+      "id": "gid://shopify/Collection/686387724615",
+      "title": "LIVROS — ARTE, LISBOA & CULTURA",
+      "handle": "livros-arte-lisboa-cultura",
+      "descriptionHtml": "<p>Livros selecionados sobre arte, artistas, Lisboa, arquitetura, fotografia, património, design e cultura. Uma área para edições de referência, catálogos, monografias, livros vintage e publicações de coleção.</p>",
+      "productsCount": 0
+    },
+    {
+      "id": "gid://shopify/Collection/686387822919",
+      "title": "OBJETOS — CASA, ESCRITÓRIO & DESIGN",
+      "handle": "objetos-casa-escritorio-design",
+      "descriptionHtml": "<p>Objetos decorativos e utilitários com carácter: peças para escritório e casa, design, objetos de coleção, vintage, curiosidades e elementos ligados a Lisboa, arte e cultura.</p>",
+      "productsCount": 0
+    },
+    {
+      "id": "gid://shopify/Collection/686387921223",
+      "title": "MÁQUINAS & DESIGN VINTAGE",
+      "handle": "maquinas-design-vintage",
+      "descriptionHtml": "<p>Máquinas de escrever, câmaras de filmar e fotografar, equipamento vintage e objetos tecnológicos de outras épocas, apresentados como peças funcionais, decorativas e de coleção.</p>",
+      "productsCount": 0
+    }
+  ]
+}
