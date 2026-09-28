@@ -1,0 +1,141 @@
+{% liquid
+  assign pomar1 = all_products['elefante-estudioso-serigrafia-de-julio-pomar']
+  assign pomar2 = all_products['elefante-estudioso-2-serigrafia-de-julio-pomar']
+  assign cargaleiro = all_products['grande-serigrafia-do-mestre-cargaleiro']
+  assign africa1 = all_products['mirada-al-vacio-olhar-para-o-vazio']
+  assign africa2 = all_products['flor-nocturna-copia']
+%}
+
+<section class="ya-home" aria-label="YES ARTE — conceito de homepage">
+  <header class="ya-nav">
+    <a class="ya-brand" href="/" aria-label="YES ARTE">
+      <img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/01_logo_yesarte_horizontal.png?v=1789763063" width="182" height="67" alt="YES ARTE" loading="eager">
+    </a>
+    <nav class="ya-links" aria-label="Navegação YES ARTE">
+      <a href="/collections/all">Obras</a>
+      <a href="/collections/autores">Artistas</a>
+      <a href="/#ya-categorias">Categorias</a>
+      <a href="/#ya-sobre">Sobre</a>
+      <a href="/#ya-loja-chiado">Loja Chiado</a>
+      <a href="/collections/all">Coleções</a>
+      <a href="/collections/obra-grafica-serigrafias">Edições Limitadas</a>
+      <a href="/#ya-antiguidades">Antiguidades</a>
+      <a href="/#ya-design">Design</a>
+    </nav>
+    <div class="ya-tools"><a href="/search">Pesquisar</a><a href="/account">Conta</a><a href="/cart">Carrinho</a></div>
+  </header>
+
+  <div class="ya-hero">
+    <div class="ya-hero-copy">
+      <p class="ya-kicker">ARTE · CULTURA · PESSOAS</p>
+      <h1>ARTE<br><span>SEM LIMITES</span></h1>
+      <p>Obras originais, artistas consagrados, novos talentos e peças com história — numa experiência visual contemporânea.</p>
+      <a class="ya-btn" href="/collections/all">Explorar o catálogo →</a>
+    </div>
+    <div class="ya-hero-art">
+      {% if cargaleiro.available and cargaleiro.featured_image %}
+        {{ cargaleiro.featured_image | image_url: width: 1500 | image_tag: loading: 'eager', widths: '750,1000,1500', sizes: '(max-width: 760px) 100vw, 64vw', alt: cargaleiro.title }}
+      {% elsif pomar1.featured_image %}
+        {{ pomar1.featured_image | image_url: width: 1500 | image_tag: loading: 'eager', widths: '750,1000,1500', sizes: '(max-width: 760px) 100vw, 64vw', alt: pomar1.title }}
+      {% endif %}
+      <div class="ya-hero-overlay"><span>YES ARTE</span><em>Arte sem limites.</em></div>
+    </div>
+  </div>
+
+  <div class="ya-benefits">
+    <span>◇ Obras originais & edições limitadas</span><span>▱ Envio seguro</span><span>⬡ Pagamentos protegidos</span><span>◎ Curadoria e apoio especializado</span>
+  </div>
+
+  <section id="ya-categorias" class="ya-section">
+    <div class="ya-section-head"><div><p>DESCOBRIR</p><h2>Categorias em destaque</h2></div><a href="/collections/all">Ver todas →</a></div>
+    <div class="ya-categories ya-categories--logos">
+      <a class="ya-cat ya-cat-logo" href="/collections/all"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-pintura.png?v=1789946208" width="600" height="800" loading="lazy" alt="Pintura"><span>Pintura</span></a>
+      <a class="ya-cat ya-cat-logo" href="/collections/escultura"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-escultura.png?v=1789946214" width="600" height="800" loading="lazy" alt="Escultura"><span>Escultura</span></a>
+      <a class="ya-cat ya-cat-logo" href="/collections/all"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-contemporanea.png?v=1789946218" width="600" height="800" loading="lazy" alt="Arte contemporânea"><span>Arte Contemporânea</span></a>
+      <a class="ya-cat ya-cat-logo" href="/collections/vhils"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-urbana.png?v=1789946223" width="600" height="800" loading="lazy" alt="Arte urbana"><span>Arte Urbana</span></a>
+      <a class="ya-cat ya-cat-logo" href="/collections/antonio-neves"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-lisboa.png?v=1789946228" width="600" height="800" loading="lazy" alt="Arte de Lisboa"><span>Arte de Lisboa</span></a>
+      <a class="ya-cat ya-cat-logo" href="/collections/all"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-portugal.png?v=1789946233" width="600" height="800" loading="lazy" alt="Arte portuguesa"><span>Arte Portuguesa</span></a>
+      <a class="ya-cat ya-cat-logo" href="/#ya-antiguidades"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-antiguidades.png?v=1789946238" width="600" height="800" loading="lazy" alt="Antiguidades"><span>Antiguidades<small>nova área</small></span></a>
+      <a class="ya-cat ya-cat-logo" href="/#ya-design"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/yesarte-cat-design.png?v=1789946244" width="600" height="800" loading="lazy" alt="Design"><span>Design<small>nova área</small></span></a>
+    </div>
+  </section>
+
+  <section class="ya-section ya-featured">
+    <div class="ya-section-head"><div><p>SELEÇÃO REAL DO CATÁLOGO</p><h2>Artistas & obras em destaque</h2></div></div>
+    <div class="ya-products">
+      {% for product in collections['julio-pomar'].products limit: 2 %}
+        <a class="ya-product" href="{{ product.url }}">
+          {% if product.featured_image %}{{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '420,650,900', sizes: '(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 25vw', alt: product.title }}{% endif %}
+          <div><p>Júlio Pomar</p><h3>{{ product.title }}</h3><span>Ver obra →</span></div>
+        </a>
+      {% endfor %}
+      {% if cargaleiro != blank and cargaleiro.available %}
+        <a class="ya-product" href="{{ cargaleiro.url }}">
+          {% if cargaleiro.featured_image %}{{ cargaleiro.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '420,650,900', sizes: '(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 25vw', alt: cargaleiro.title }}{% endif %}
+          <div><p>Manuel Cargaleiro</p><h3>{{ cargaleiro.title }}</h3><span>Ver obra →</span></div>
+        </a>
+      {% endif %}
+      {% if africa1 != blank %}
+        <a class="ya-product" href="{{ africa1.url }}">
+          {% if africa1.featured_image %}{{ africa1.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '420,650,900', sizes: '(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 25vw', alt: africa1.title }}{% endif %}
+          <div><p>Arte contemporânea</p><h3>{{ africa1.title }}</h3><span>Ver obra →</span></div>
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="ya-community" aria-label="Comunidade YES ARTE"><div class="ya-section-head"><div><p>CONHECER · PARTICIPAR</p><h2>Uma comunidade para a arte</h2></div></div><div class="ya-community-grid"><a href="/collections/autores"><span>01 / ARTISTAS</span><h3>Descubra os artistas</h3><p>Explore autores, percursos e obras disponíveis no catálogo.</p><b>Ver artistas →</b></a><a href="/collections/all"><span>02 / COLECIONADORES</span><h3>Encontre a sua próxima obra</h3><p>Pesquise pintura, escultura e edições para a sua coleção.</p><b>Explorar obras →</b></a><a href="/pages/contact"><span>03 / GALERIAS & INSTITUIÇÕES</span><h3>Colabore com a YES ARTE</h3><p>Contacte-nos para propostas de exposições, eventos e parcerias culturais.</p><b>Falar connosco →</b></a></div></section>
+
+  <section class="ya-duo">
+    <article id="ya-antiguidades" class="ya-editorial ya-antique">
+      <div class="ya-symbol">◷</div><p>NOVA ÁREA — EM PREPARAÇÃO</p><h2>Antiguidades</h2><h3>História, beleza e valor no tempo.</h3><p>Espaço preparado para mobiliário, cerâmica, vidro, relógios, objectos decorativos e peças históricas. A área fica pronta no tema de teste, sem ser publicada até existir catálogo validado.</p><a href="/collections/all">Explorar catálogo atual →</a>
+    </article>
+    <article id="ya-design" class="ya-editorial ya-design">
+      <div class="ya-symbol">◇</div><p>NOVA ÁREA — EM PREPARAÇÃO</p><h2>Peças de Design</h2><h3>Forma, função e emoção.</h3><p>Seleção futura de design português e internacional, mobiliário, iluminação e objectos de autor. O espaço visual já está criado, sem inventar produtos que ainda não existem na loja.</p><a href="/collections/all">Ver peças atuais →</a>
+    </article>
+  </section>
+
+  <section class="ya-bottom">
+    <div><p>EDIÇÕES LIMITADAS</p><h2>Obras para colecionar.</h2><a class="ya-btn" href="/collections/obra-grafica-serigrafias">Ver edições →</a></div>
+    <div><p>ARTISTAS</p><h2>Grandes nomes, novos olhares.</h2><a class="ya-btn" href="/collections/autores">Descobrir artistas →</a></div>
+    <div><p>YES ARTE</p><h2>Uma nova casa digital para a arte.</h2><a class="ya-btn" href="/collections/all">Entrar →</a></div>
+  </section>
+
+  <footer class="ya-footer"><a class="ya-brand ya-brand-footer" href="/" aria-label="YES ARTE"><img src="https://cdn.shopify.com/s/files/1/0563/4434/6790/files/01_logo_yesarte_horizontal.png?v=1789763063" width="182" height="67" alt="YES ARTE" loading="lazy"></a><p>Arte sem limites · Lisboa · Portugal</p><p class="ya-muted">Arte · Cultura · Pessoas · Um mundo mais criativo</p></footer>
+</section>
+
+<style>
+  .shopify-section-group-header-group,.shopify-section-group-footer-group{display:none!important}.ya-home{--c:#d88a55;--c2:#8b4b2c;--ink:#060607;--panel:#0d0d0f;--line:#352118;--txt:#f4f1ee;--muted:#a79d96;background:var(--ink);color:var(--txt);font-family:Arial,Helvetica,sans-serif;letter-spacing:.02em}.ya-home *{box-sizing:border-box}.ya-home a{color:inherit;text-decoration:none}.ya-nav{min-height:88px;display:grid;grid-template-columns:260px 1fr auto;align-items:center;gap:28px;padding:14px clamp(20px,4vw,70px);border-bottom:1px solid var(--c2);position:relative;background:#050506}.ya-brand{display:inline-flex;align-items:baseline;position:relative;font-weight:800;font-size:34px;letter-spacing:.04em}.ya-brand small{position:absolute;left:64px;top:40px;font-size:10px;color:var(--c);letter-spacing:.22em;font-weight:400}.ya-yes,.ya-rte{background:linear-gradient(110deg,#8a4729,#f0b07b,#7a3d24);-webkit-background-clip:text;background-clip:text;color:transparent}.ya-a{font-size:45px;margin:-5px 1px 0;color:#ff5d5d;text-shadow:7px -3px 0 #1b73ff,-6px 4px 0 #ff9d21}.ya-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;text-transform:uppercase;font-size:11px;letter-spacing:.12em}.ya-links a:hover,.ya-tools a:hover{color:var(--c)}.ya-tools{display:flex;gap:14px;font-size:11px;color:#d6cdc7}.ya-hero{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(420px,1.28fr);min-height:560px;border-bottom:1px solid var(--c2)}.ya-hero-copy{padding:80px clamp(28px,5vw,80px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 15% 50%,#21130e 0,#080809 43%,#050506 100%)}.ya-kicker,.ya-section-head p,.ya-editorial>p,.ya-bottom p{color:var(--c);font-size:12px;letter-spacing:.22em}.ya-hero h1{font-size:clamp(54px,6vw,96px);line-height:.9;margin:18px 0 26px;letter-spacing:.08em;font-weight:300}.ya-hero h1 span{color:#eaa06e}.ya-hero-copy>p:not(.ya-kicker){max-width:520px;color:#c5bbb4;line-height:1.7;font-size:16px}.ya-btn{display:inline-block;border:1px solid var(--c);padding:14px 22px;margin-top:28px;width:max-content;color:#f6c5a3!important;text-transform:uppercase;font-size:12px;letter-spacing:.16em}.ya-btn:hover{background:var(--c);color:#090909!important}.ya-hero-art{position:relative;overflow:hidden;background:#141012}.ya-hero-art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:saturate(.93) contrast(1.04)}.ya-hero-art:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,6,.36),transparent 40%,rgba(5,5,6,.2))}.ya-hero-overlay{position:absolute;right:28px;bottom:30px;z-index:2;border-left:1px solid var(--c);padding-left:20px;display:flex;flex-direction:column}.ya-hero-overlay span{letter-spacing:.28em;font-size:12px}.ya-hero-overlay em{font-family:Georgia,serif;color:#efad7a;font-size:25px;margin-top:7px}.ya-benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line)}.ya-benefits span{background:#0b0b0c;padding:20px;text-align:center;color:#cdbfb6;font-size:11px;letter-spacing:.06em}.ya-section{padding:64px clamp(20px,4vw,70px)}.ya-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:25px}.ya-section-head h2{margin:7px 0 0;font-weight:300;font-size:clamp(28px,3vw,44px);letter-spacing:.06em}.ya-section-head>a{color:var(--c);font-size:12px;text-transform:uppercase;letter-spacing:.15em}.ya-categories{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}.ya-cat{height:280px;background:#111;position:relative;overflow:hidden;border:1px solid #42281b;display:flex;align-items:flex-end;padding:18px}.ya-cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:.4s transform}.ya-cat:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent 62%)}.ya-cat>span{position:relative;z-index:2;text-transform:uppercase;font-size:12px;line-height:1.35;letter-spacing:.08em}.ya-cat small{display:block;color:var(--c);font-size:9px;margin-top:5px}.ya-cat:hover img{transform:scale(1.04)}.ya-icon-art{position:absolute;inset:0;display:grid;place-items:center;font-family:Georgia,serif;font-size:96px;color:#ce8153;background:radial-gradient(circle,#26150e 0,#0d0d0f 65%);padding-bottom:28px}.ya-lines{font-family:Arial,sans-serif;font-weight:100;letter-spacing:-.18em}.ya-water{color:#65a9bd;font-size:130px}.ya-new{background:linear-gradient(135deg,#21140f,#09090a)}.ya-featured{padding-top:20px}.ya-products{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.ya-product{background:#0e0e10;border:1px solid #372219;overflow:hidden;min-height:430px}.ya-product img{width:100%;height:320px;object-fit:cover}.ya-product>div{padding:17px}.ya-product p{color:var(--c);text-transform:uppercase;letter-spacing:.14em;font-size:10px;margin:0 0 8px}.ya-product h3{font-size:15px;font-weight:400;line-height:1.4;margin:0;min-height:42px}.ya-product span{display:block;color:#d99a70;font-size:11px;margin-top:14px}.ya-duo{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.ya-editorial{padding:70px clamp(30px,5vw,85px);min-height:430px;position:relative;overflow:hidden}.ya-editorial:first-child{border-right:1px solid var(--line)}.ya-editorial h2{font-size:48px;font-weight:300;margin:12px 0 2px}.ya-editorial h3{font-family:Georgia,serif;color:#e5ad87;font-size:22px;font-weight:400}.ya-editorial p:last-of-type{max-width:560px;color:#b7ada6;line-height:1.7}.ya-editorial>a{display:inline-block;color:var(--c);margin-top:15px;text-transform:uppercase;font-size:11px;letter-spacing:.15em}.ya-symbol{position:absolute;right:7%;top:12%;font-size:150px;color:#4a2a1c;opacity:.6}.ya-antique{background:radial-gradient(circle at 85% 30%,#2b190e,#09090a 63%)}.ya-design{background:radial-gradient(circle at 80% 30%,#251c17,#09090a 62%)}.ya-bottom{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}.ya-bottom>div{padding:52px clamp(24px,4vw,60px);min-height:290px;border-right:1px solid var(--line);background:linear-gradient(145deg,#0b0b0c,#14100e)}.ya-bottom>div:last-child{border-right:0}.ya-bottom h2{font-size:30px;font-weight:300;max-width:320px}.ya-footer{min-height:160px;padding:45px clamp(20px,4vw,70px);display:grid;grid-template-columns:1fr auto;align-items:center;border-top:1px solid #4a2b1d}.ya-brand-footer{font-size:30px;width:max-content}.ya-footer p{color:#b8aaa1;font-size:12px}.ya-footer .ya-muted{grid-column:2;color:#685b54}.ya-brand-footer small{top:36px}.ya-home .placeholder-svg{background:#171719;color:#6a4a3a;width:100%;height:100%}.ya-cat-logo{padding:0}.ya-cat-logo img{opacity:1}.ya-cat-logo:after{background:linear-gradient(0deg,rgba(0,0,0,.88),transparent 52%)}
+  @media(max-width:1180px){.ya-nav{grid-template-columns:220px 1fr}.ya-tools{display:none}.ya-links{justify-content:flex-end}.ya-categories{grid-template-columns:repeat(4,1fr)}.ya-products{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:760px){.ya-nav{grid-template-columns:1fr;padding:14px 20px}.ya-links{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding:10px 0}.ya-hero{grid-template-columns:1fr}.ya-hero-copy{padding:58px 24px}.ya-hero-art{min-height:430px}.ya-benefits{grid-template-columns:1fr 1fr}.ya-categories{grid-template-columns:repeat(2,1fr)}.ya-cat{height:230px}.ya-products{grid-template-columns:1fr 1fr}.ya-product{min-height:340px}.ya-product img{height:230px}.ya-duo,.ya-bottom{grid-template-columns:1fr}.ya-editorial:first-child,.ya-bottom>div{border-right:0;border-bottom:1px solid var(--line)}.ya-footer{grid-template-columns:1fr;gap:24px}.ya-footer .ya-muted{grid-column:1}.ya-hero h1{font-size:54px}}
+.ya-brand img{display:block;width:182px;height:auto}.ya-brand-footer img{width:160px}.ya-community{padding:64px clamp(20px,4vw,70px);border-top:1px solid #42281c}.ya-community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ya-community-grid a{display:block;padding:38px;background:linear-gradient(145deg,#141013,#0b0b0d);border:1px solid #4b291e;min-height:255px;transition:transform .2s,border-color .2s}.ya-community-grid a:hover{transform:translateY(-3px);border-color:#df9163}.ya-community-grid span,.ya-community-grid b{font-size:11px;color:#e19a6f;letter-spacing:.14em}.ya-community-grid h3{font-size:27px;font-weight:400;margin:30px 0 12px}.ya-community-grid p{font-size:14px;color:#bdb1a9;line-height:1.6}.ya-community-grid b{display:block;margin-top:23px;font-weight:400}@media(max-width:760px){.ya-community-grid{grid-template-columns:1fr}.ya-brand img{width:150px}.ya-community-grid a{min-height:200px}}
+  @media (min-width: 1181px){.ya-categories{grid-template-columns:repeat(4,minmax(0,1fr))}.ya-cat{height:320px}}
+  @media (max-width: 760px){
+    .ya-home{overflow-x:hidden}
+    .ya-nav{min-height:74px;gap:8px;padding:10px 16px;position:sticky;top:0;z-index:20;background:rgba(5,5,6,.97);backdrop-filter:blur(14px)}
+    .ya-brand{min-height:48px;align-items:center}.ya-brand img{width:148px}
+    .ya-links{width:calc(100vw - 32px);gap:6px;margin-top:4px;padding:8px 0 4px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+    .ya-links a{flex:0 0 auto;min-height:44px;display:flex;align-items:center;padding:0 14px;border:1px solid #39251d;border-radius:999px;scroll-snap-align:start;font-size:10px}
+    .ya-hero{min-height:0}.ya-hero-copy{padding:44px 20px 38px}.ya-hero h1{font-size:clamp(44px,15vw,62px);line-height:.92;margin:14px 0 20px}.ya-hero-copy>p:not(.ya-kicker){font-size:15px;line-height:1.6}
+    .ya-btn{width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;padding:14px 16px;margin-top:22px;text-align:center}
+    .ya-hero-art{min-height:310px}.ya-hero-overlay{right:18px;bottom:20px}.ya-hero-overlay em{font-size:20px}
+    .ya-benefits{grid-template-columns:1fr 1fr}.ya-benefits span{min-height:74px;display:flex;align-items:center;justify-content:center;padding:14px 10px;font-size:10px;line-height:1.45}
+    .ya-section,.ya-community,.ya-world{padding:46px 16px}.ya-section-head{align-items:flex-start;flex-direction:column;margin-bottom:20px}.ya-section-head h2{font-size:32px;line-height:1.12}.ya-section-head>a{min-height:44px;display:flex;align-items:center}
+    .ya-categories{grid-template-columns:1fr 1fr;gap:8px}.ya-cat{height:220px;padding:14px}.ya-cat>span{font-size:11px}.ya-icon-art{font-size:76px}
+    .ya-products{grid-template-columns:1fr;gap:14px}.ya-product{min-height:0}.ya-product img{height:auto;aspect-ratio:4/3;object-fit:cover}.ya-product>div{padding:18px}.ya-product h3{min-height:0;font-size:17px}.ya-product span{min-height:44px;display:flex;align-items:center}
+    .ya-community-grid{grid-template-columns:1fr;gap:10px}.ya-community-grid a{min-height:0;padding:28px 22px}.ya-community-grid h3{font-size:24px;margin:22px 0 10px}.ya-community-grid b{min-height:44px;display:flex;align-items:center}
+    .ya-editorial{min-height:0;padding:52px 22px}.ya-editorial h2{font-size:38px}.ya-symbol{font-size:104px;opacity:.38}.ya-bottom>div{min-height:0;padding:42px 22px}.ya-bottom h2{font-size:27px}
+    .ya-footer{padding:38px 20px;min-height:0}.ya-footer p{line-height:1.5}
+  }
+  @media (max-width: 390px){.ya-categories{grid-template-columns:1fr}.ya-cat{height:245px}.ya-benefits{grid-template-columns:1fr}.ya-benefits span{min-height:58px}.ya-hero h1{font-size:43px}}
+  @media (prefers-reduced-motion:reduce){.ya-home *{scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+
+{% schema %}
+{
+  "name": "YES ARTE — Homepage",
+  "settings": [],
+  "presets": [{"name": "YES ARTE — Homepage"}]
+}
+{% endschema %}
