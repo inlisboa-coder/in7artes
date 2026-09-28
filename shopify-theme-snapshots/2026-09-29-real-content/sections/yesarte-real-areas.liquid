@@ -1,0 +1,48 @@
+{% liquid
+  assign c_photo = collections['fotografia-arte-lisboa-imagem']
+  assign c_books = collections['livros-arte-lisboa-cultura']
+  assign c_objects = collections['objetos-casa-escritorio-design']
+  assign c_vintage = collections['maquinas-design-vintage']
+  assign c_jg = collections['jose-de-guimaraes']
+  assign c_jp = collections['julio-pomar']
+  assign c_jc = collections['joao-cutileiro']
+  assign c_jr = collections['julio-resende']
+  assign c_an = collections['antonio-neves']
+%}
+<section class="ya-realareas">
+  <div class="page-width">
+    <header class="ya-realareas__head">
+      <p>CONTEÚDO REAL · CATÁLOGO YES ARTE</p>
+      <h2>Artistas, coleções e novas áreas</h2>
+      <div>As áreas abaixo usam coleções reais da loja. Quando uma área ainda não tem peças associadas, o site assinala claramente que a seleção está em preparação.</div>
+    </header>
+
+    <div class="ya-realareas__artists">
+      {% assign artist_rows = 'jose-de-guimaraes|José de Guimarães;julio-pomar|Júlio Pomar;joao-cutileiro|João Cutileiro;julio-resende|Júlio Resende;antonio-neves|António Neves' | split: ';' %}
+      {% for row in artist_rows %}
+        {% assign parts = row | split: '|' %}
+        {% assign col = collections[parts[0]] %}
+        <a href="{{ col.url }}">
+          {% if col.image %}{{ col.image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320,500,700', sizes: '(max-width:760px) 50vw, 20vw', alt: parts[1] }}{% elsif col.products.first.featured_image %}{{ col.products.first.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320,500,700', sizes: '(max-width:760px) 50vw, 20vw', alt: parts[1] }}{% endif %}
+          <span><strong>{{ parts[1] }}</strong><small>{{ col.products_count }} obras</small></span>
+        </a>
+      {% endfor %}
+    </div>
+
+    <div class="ya-realareas__new">
+      <article><p>FOTOGRAFIA</p><h3>Arte, Lisboa & Imagem</h3><div>Fotografia artística, documental e de autor, com foco em Lisboa, Portugal e mundo lusófono. A seleção comercial está em preparação.</div><a href="{{ c_photo.url }}">Entrar na área →</a></article>
+      <article><p>LIVROS</p><h3>Arte, Lisboa & Cultura</h3><div>Monografias, catálogos, arquitetura, fotografia, património, design e edições de coleção. A seleção comercial está em preparação.</div><a href="{{ c_books.url }}">Entrar na área →</a></article>
+      <article><p>OBJETOS</p><h3>Casa, Escritório & Design</h3><div>Objetos decorativos, peças de autor, cerâmica e design com interesse estético e cultural. A seleção comercial está em preparação.</div><a href="{{ c_objects.url }}">Entrar na área →</a></article>
+      <article><p>VINTAGE</p><h3>Máquinas & Design</h3><div>Máquinas de escrever, câmaras e tecnologia analógica tratadas como objetos de design e coleção. A seleção comercial está em preparação.</div><a href="{{ c_vintage.url }}">Entrar na área →</a></article>
+    </div>
+
+    <div class="ya-realareas__cta">
+      <div><p>VENDA · CONSIGNAÇÃO · COLABORAÇÃO</p><h3>Tem uma obra, coleção, livro, fotografia ou objeto com interesse?</h3><span>A YES ARTE analisa propostas de artistas, colecionadores, galerias, instituições e particulares antes de integrar novos conteúdos no marketplace.</span></div>
+      <a class="button" href="/pages/contact">Apresentar proposta</a>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+.ya-realareas{background:#f3eee9;color:#181416;padding:72px 0;font-family:Arial,sans-serif}.ya-realareas__head{max-width:850px;margin-bottom:34px}.ya-realareas__head>p,.ya-realareas__new article>p,.ya-realareas__cta p{color:#9b5432;letter-spacing:.18em;font-size:11px;font-weight:700}.ya-realareas__head h2{font-size:clamp(38px,5vw,68px);font-weight:300;line-height:1;margin:10px 0 18px}.ya-realareas__head>div{color:#655a54;line-height:1.7}.ya-realareas__artists{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:42px}.ya-realareas__artists a{background:#fff;border:1px solid #d5c1b2;color:#181416;text-decoration:none}.ya-realareas__artists img{width:100%;aspect-ratio:1/1;object-fit:cover}.ya-realareas__artists span{display:flex;justify-content:space-between;gap:10px;padding:15px;align-items:end}.ya-realareas__artists strong{font-size:14px}.ya-realareas__artists small{color:#9b5432;white-space:nowrap}.ya-realareas__new{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.ya-realareas__new article{background:#171315;color:#f5efeb;padding:28px;min-height:290px;display:flex;flex-direction:column}.ya-realareas__new h3{font-size:26px;font-weight:400;margin:10px 0 16px}.ya-realareas__new article>div{color:#c7bbb4;line-height:1.65}.ya-realareas__new a{margin-top:auto;padding-top:24px;color:#e29a6d;text-decoration:none;font-size:12px}.ya-realareas__cta{margin-top:16px;background:#251913;color:#f4eee9;padding:32px;display:flex;justify-content:space-between;gap:35px;align-items:center}.ya-realareas__cta h3{font-size:30px;font-weight:400;margin:8px 0}.ya-realareas__cta span{color:#c9bbb3;line-height:1.6}.ya-realareas__cta .button{white-space:nowrap}@media(max-width:1000px){.ya-realareas__artists{grid-template-columns:repeat(3,1fr)}.ya-realareas__new{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.ya-realareas{padding:52px 0}.ya-realareas__artists{grid-template-columns:repeat(2,1fr)}.ya-realareas__new{grid-template-columns:1fr}.ya-realareas__cta{align-items:flex-start;flex-direction:column}.ya-realareas__cta .button{width:100%}}
+{% endstylesheet %}
+{% schema %}{"name":"YES ARTE — Conteúdo real","settings":[],"presets":[{"name":"YES ARTE — Conteúdo real"}]}{% endschema %}
