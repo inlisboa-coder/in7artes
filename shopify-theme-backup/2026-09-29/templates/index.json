@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "yesarte_home": {
+      "type": "yesarte-home",
+      "settings": {}
+    },
+    "yesarte_temas": {
+      "type": "yesarte-themes",
+      "settings": {}
+    },
+    "yesarte_newsletter": {
+      "type": "yesarte-newsletter",
+      "settings": {}
+    },
+    "yesarte_proposta": {
+      "type": "yesarte-offer-form",
+      "settings": {}
+    },
+    "yesarte_sobre": {
+      "type": "yesarte-about",
+      "settings": {}
+    },
+    "yesarte_loja": {
+      "type": "yesarte-store",
+      "settings": {}
+    },
+    "yesarte_paises": {
+      "type": "yesarte-paises",
+      "settings": {}
+    },
+    "yesarte_world": {
+      "type": "yesarte-world-art",
+      "settings": {}
+    }
+  },
+  "order": [
+    "yesarte_home",
+    "yesarte_world",
+    "yesarte_temas",
+    "yesarte_newsletter",
+    "yesarte_proposta",
+    "yesarte_sobre",
+    "yesarte_loja",
+    "yesarte_paises"
+  ]
+}
