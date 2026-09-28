@@ -1,0 +1,38 @@
+{% liquid
+  assign c_portugal = collections['antonio-neves']
+  assign c_grafica = collections['obra-grafica-serigrafias']
+  assign c_escultura = collections['escultura']
+  assign c_africa = collections['arte-africana']
+  assign c_guine = collections['arte-da-guine-bissau']
+  assign c_mocambique = collections['arte-mocambique']
+%}
+<section class="ya-themes" aria-labelledby="YaThemesTitle">
+  <div class="ya-themes__head">
+    <div><p>COLEÇÕES REAIS</p><h2 id="YaThemesTitle">Descobrir a YES ARTE por áreas</h2></div>
+    <a href="/collections/all">Explorar todas →</a>
+  </div>
+  <div class="ya-themes__grid">
+    {% assign groups = 'antonio-neves|Portugal & Lisboa|Aguarelas, cidade e identidade;obra-grafica-serigrafias|Obra gráfica|Serigrafia, gravura e edição limitada;escultura|Escultura|Bronze, madeira e tridimensionalidade;arte-africana|Arte Africana|Autores, máscaras, pintura e escultura;arte-da-guine-bissau|Guiné-Bissau|Arte e autores guineenses;arte-mocambique|Moçambique|Malangatana, Chichorro e outros autores' | split: ';' %}
+    {% for row in groups %}
+      {% assign parts = row | split: '|' %}
+      {% assign col = collections[parts[0]] %}
+      <a class="ya-theme-card" href="{{ col.url }}">
+        {% if col.image %}
+          {{ col.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500,800,1200', sizes: '(max-width:760px) 100vw, 33vw', alt: parts[1] }}
+        {% elsif col.products.first.featured_image %}
+          {{ col.products.first.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500,800,1200', sizes: '(max-width:760px) 100vw, 33vw', alt: parts[1] }}
+        {% endif %}
+        <span>
+          <small>0{{ forloop.index }}</small>
+          <strong>{{ parts[1] }}</strong>
+          <em>{{ parts[2] }}</em>
+          <b>{{ col.products_count }} obras</b>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% stylesheet %}
+.ya-themes{background:#080809;color:#f4f1ee;padding:64px clamp(20px,4vw,70px);font-family:Arial,sans-serif}.ya-themes a{color:inherit;text-decoration:none}.ya-themes__head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px}.ya-themes__head p{margin:0;color:#d88a55;font-size:12px;letter-spacing:.22em}.ya-themes__head h2{margin:8px 0 0;font-size:clamp(30px,4vw,48px);font-weight:300}.ya-themes__head>a{color:#d88a55;font-size:12px;text-transform:uppercase}.ya-themes__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ya-theme-card{position:relative;min-height:390px;overflow:hidden;border:1px solid #44281c;background:#151113}.ya-theme-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .45s}.ya-theme-card:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,4,5,.96),transparent 72%)}.ya-theme-card>span{position:absolute;z-index:1;left:26px;right:26px;bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:7px 14px}.ya-theme-card small{grid-row:1/4;color:#d88a55}.ya-theme-card strong{font-size:23px;font-weight:400}.ya-theme-card em{color:#c4b6ad;font-family:Georgia,serif;font-style:normal}.ya-theme-card b{font-size:10px;color:#e7a479;letter-spacing:.12em;text-transform:uppercase}.ya-theme-card:hover img{transform:scale(1.035)}@media(max-width:900px){.ya-themes__grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.ya-themes{padding:46px 16px}.ya-themes__head{align-items:flex-start;flex-direction:column}.ya-themes__grid{grid-template-columns:1fr}.ya-theme-card{min-height:340px}}
+{% endstylesheet %}
+{% schema %}{"name":"YES ARTE — Áreas reais","settings":[],"presets":[{"name":"YES ARTE — Áreas reais"}]}{% endschema %}
